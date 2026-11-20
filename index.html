@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nirmal Kumar Sankaranarayanan | AI / ML Engineer & Data Scientist</title>
+  <meta name="description" content="Portfolio of Nirmal Kumar Sankaranarayanan — AI / Machine Learning Engineer & Data Scientist building production-ready RAG systems, multimodal computer vision pipelines, and NLP intelligence architectures." />
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slatebase: '#0f172a',
+            slatecard: '#1e293b',
+            skyaccent: '#38bdf8',
+            indigoaccent: '#818cf8',
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Subtle grid pattern background */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body class="bg-[#0f172a] text-slate-200 font-sans antialiased selection:bg-sky-500/30 selection:text-sky-200 overflow-x-hidden">
+
+  <!-- Toast Notification Banner (Replaces alert) -->
+  <div id="toast-notification" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300 translate-y-4 opacity-0">
+    <div class="flex items-center gap-3 bg-slate-800 border border-sky-500/40 text-slate-100 px-4 py-3 rounded-xl shadow-2xl shadow-sky-950/50">
+      <svg class="w-5 h-5 text-sky-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+      </svg>
+      <span id="toast-message" class="text-sm font-medium">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#0f172a]/85 border-b border-slate-800/80">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Brand Monogram -->
+        <a href="#top" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-lg bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center text-slate-950 font-mono font-bold text-sm shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+            NK
+          </div>
+          <span class="font-semibold text-slate-100 tracking-tight text-sm sm:text-base">
+            Nirmal<span class="text-sky-400">.ai</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+          <a href="#about" class="hover:text-sky-400 transition-colors">About</a>
+          <a href="#projects" class="hover:text-sky-400 transition-colors">Projects</a>
+          <a href="#experience" class="hover:text-sky-400 transition-colors">Experience</a>
+          <a href="#skills" class="hover:text-sky-400 transition-colors">Skills</a>
+          <a href="#contact" class="px-4 py-2 rounded-lg bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500 hover:text-slate-950 font-semibold transition-all">
+            Contact
+          </a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" aria-label="Toggle Navigation" class="md:hidden p-2.5 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden bg-[#0f172a] border-b border-slate-800 px-4 pt-2 pb-5 space-y-2">
+      <a href="#about" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-slate-800/60">About</a>
+      <a href="#projects" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-slate-800/60">Projects</a>
+      <a href="#experience" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-slate-800/60">Experience</a>
+      <a href="#skills" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-sky-400 hover:bg-slate-800/60">Skills</a>
+      <a href="#contact" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-sky-400 bg-sky-500/10 border border-sky-500/30">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="top" class="relative bg-grid-pattern pt-16 pb-24 sm:pt-24 sm:pb-32 overflow-hidden border-b border-slate-800/70">
+    <!-- Ambient Glow Orbs -->
+    <div class="pointer-events-none absolute -top-24 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-sky-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+    <div class="pointer-events-none absolute top-32 right-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <!-- Status & Location Badge -->
+        <div class="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-sky-400 mb-6">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          <span>Open to AI / ML & Data Science Roles</span>
+          <span class="text-slate-600 hidden sm:inline">•</span>
+          <span class="text-slate-400 flex items-center gap-1">
+            <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+            Coimbatore, Tamil Nadu, India
+          </span>
+        </div>
+
+        <!-- Name -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15] mb-4">
+          Nirmal Kumar <br class="hidden sm:block" />
+          <span class="bg-gradient-to-r from-sky-400 via-indigo-400 to-sky-300 bg-clip-text text-transparent">
+            Sankaranarayanan
+          </span>
+        </h1>
+
+        <!-- Role Title -->
+        <h2 class="text-lg sm:text-2xl font-semibold text-slate-200 mb-5">
+          AI / Machine Learning Engineer &amp; Data Scientist
+        </h2>
+
+        <!-- Tagline -->
+        <p class="text-base sm:text-lg text-slate-400 leading-relaxed mb-8 max-w-2xl">
+          Building production-ready RAG systems, multimodal computer vision pipelines, and NLP intelligence architectures.
+        </p>
+
+        <!-- Primary Action Buttons -->
+        <div class="flex flex-wrap items-center gap-3.5">
+          <a href="#contact" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-semibold text-sm sm:text-base shadow-lg shadow-sky-500/20 hover:opacity-95 hover:-translate-y-0.5 transition-all">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+            Get in Touch
+          </a>
+
+          <a href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#1e293b] text-slate-200 border border-slate-700 hover:border-sky-400/60 hover:text-sky-400 font-medium text-sm sm:text-base transition-all">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+            </svg>
+            GitHub
+          </a>
+
+          <a href="https://www.linkedin.com/in/nirmal-kumar-sankaranarayanan-a9172bb5" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#1e293b] text-slate-200 border border-slate-700 hover:border-indigo-400/60 hover:text-indigo-400 font-medium text-sm sm:text-base transition-all">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path>
+            </svg>
+            LinkedIn
+          </a>
+        </div>
+
+        <!-- Quick Metric Highlights -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-14 pt-10 border-t border-slate-800/80">
+          <div class="bg-[#1e293b]/60 border border-slate-800 rounded-xl p-4">
+            <div class="font-mono text-xl sm:text-2xl font-bold text-sky-400">5+</div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1">End-to-End AI/ML Systems</div>
+          </div>
+          <div class="bg-[#1e293b]/60 border border-slate-800 rounded-xl p-4">
+            <div class="font-mono text-xl sm:text-2xl font-bold text-indigo-400">0.2058</div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1">BART-base ROUGE-L Score</div>
+          </div>
+          <div class="bg-[#1e293b]/60 border border-slate-800 rounded-xl p-4">
+            <div class="font-mono text-xl sm:text-2xl font-bold text-sky-400">0.952</div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1">Regression R² Benchmark</div>
+          </div>
+          <div class="bg-[#1e293b]/60 border border-slate-800 rounded-xl p-4">
+            <div class="font-mono text-xl sm:text-2xl font-bold text-indigo-400">IITM / GUVI</div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1">Certified Data Scientist</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about" class="py-20 sm:py-24 border-b border-slate-800/70">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row gap-12 items-start">
+        <!-- Left Column: Section Heading & Core Narrative -->
+        <div class="lg:w-7/12 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-400">
+            <span class="w-8 h-[1px] bg-sky-400"></span>
+            About Me
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Engineering Discipline Meets Applied Artificial Intelligence
+          </h3>
+          <p class="text-slate-300 leading-relaxed text-base">
+            I am an analytical engineer transitioning into <strong class="text-white font-semibold">Data Science, Machine Learning, and Generative AI</strong>, bringing structured systems thinking and operational rigor to modern AI engineering. I hold an <strong class="text-sky-400 font-medium">Advanced Professional Certification in Data Science from HCL GUVI / IITM Pravartak</strong> and a <strong class="text-white font-medium">B.E. in Mechanical Engineering</strong> from JCT College of Engineering and Technology (2014).
+          </p>
+          <p class="text-slate-400 leading-relaxed text-base">
+            Most recently, I worked as an <strong class="text-slate-200 font-medium">AI/ML Intern on the CET Team at Siam Computing (Sept 2026 – Nov 2026)</strong>, architecting end-to-end multimodal and Retrieval-Augmented Generation (RAG) pipelines. Prior to specializing in AI/ML, I managed technical operations and client SLAs as an <strong class="text-slate-200 font-medium">AMC Engineer at Anjan Group in Dubai, UAE (until April 2025)</strong>—a background that drives my focus on fault-tolerant, low-latency, and measurable production deployments.
+          </p>
+        </div>
+
+        <!-- Right Column: Core Competencies Card -->
+        <div class="lg:w-5/12 w-full bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 sm:p-8 shadow-xl">
+          <h4 class="text-base font-semibold text-white mb-5 flex items-center gap-2">
+            <svg class="w-5 h-5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+            </svg>
+            Architectural Focus Areas
+          </h4>
+          <ul class="space-y-4 text-sm">
+            <li class="flex items-start gap-3">
+              <span class="mt-1 w-2 h-2 rounded-full bg-sky-400 shrink-0"></span>
+              <div>
+                <span class="font-semibold text-slate-100 block">Multi-Tenant RAG &amp; Agent Memory</span>
+                <span class="text-slate-400">Token-aware retrieval, Pinecone vector indexing, multi-tier conversation memory, and low-latency Groq LLM streaming.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 w-2 h-2 rounded-full bg-indigo-400 shrink-0"></span>
+              <div>
+                <span class="font-semibold text-slate-100 block">Multimodal Computer Vision &amp; Audio Fusion</span>
+                <span class="text-slate-400">Combining MediaPipe skeletal pose estimation, YAMNet acoustic event detection, and VLM reasoning to eliminate false positives.</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-1 w-2 h-2 rounded-full bg-sky-400 shrink-0"></span>
+              <div>
+                <span class="font-semibold text-slate-100 block">Multi-Task NLP &amp; Transformer Benchmarking</span>
+                <span class="text-slate-400">End-to-end classification, NER, and abstractive summarization comparing classical ML, Seq2Seq, BERT, T5, and BART architectures.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  <section id="projects" class="py-20 sm:py-24 border-b border-slate-800/70">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header & Filter Tabs -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-400 mb-3">
+            <span class="w-8 h-[1px] bg-sky-400"></span>
+            Engineering Portfolio
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Featured AI &amp; ML Projects
+          </h3>
+        </div>
+
+        <!-- Interactive Category Filter Tabs -->
+        <div id="project-filters" class="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
+          <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-sky-500 text-slate-950 transition-all">
+            All (5)
+          </button>
+          <button data-filter="genai" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#1e293b] text-slate-300 border border-slate-700 hover:border-sky-400/50 transition-all">
+            Generative AI &amp; RAG
+          </button>
+          <button data-filter="cv" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#1e293b] text-slate-300 border border-slate-700 hover:border-sky-400/50 transition-all">
+            Computer Vision
+          </button>
+          <button data-filter="nlp" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#1e293b] text-slate-300 border border-slate-700 hover:border-sky-400/50 transition-all">
+            NLP &amp; ML
+          </button>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Populated dynamically via JavaScript for clean filtering and modal inspection -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Architecture Modal -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm">
+    <div class="bg-[#1e293b] border border-slate-700 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative animate-fade-in max-h-[90vh] overflow-y-auto">
+      <button id="close-modal-btn" aria-label="Close modal" class="absolute top-5 right-5 p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div id="modal-category" class="text-xs font-mono uppercase tracking-wider text-sky-400 mb-2"></div>
+      <h4 id="modal-title" class="text-xl sm:text-2xl font-bold text-white mb-4 pr-8"></h4>
+      <p id="modal-description" class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6"></p>
+
+      <div class="mb-6">
+        <h5 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Key Technical Highlights</h5>
+        <ul id="modal-highlights" class="space-y-2.5 text-sm text-slate-300"></ul>
+      </div>
+
+      <div class="mb-6">
+        <h5 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-3">Technology Stack</h5>
+        <div id="modal-stack" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <div class="pt-4 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-3">
+        <a href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500 hover:text-slate-950 font-semibold text-sm transition-all">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+          View Repositories on GitHub
+        </a>
+        <button id="modal-done-btn" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-sm font-medium transition-colors">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience & Education Timeline Section -->
+  <section id="experience" class="py-20 sm:py-24 border-b border-slate-800/70 bg-slate-900/30">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-400 mb-3">
+          <span class="w-8 h-[1px] bg-sky-400"></span>
+          Career &amp; Academic Path
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          Experience &amp; Education
+        </h3>
+      </div>
+
+      <div class="relative border-l-2 border-slate-800 ml-3 sm:ml-6 space-y-10">
+        <!-- Item 1 -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-sky-400 ring-4 ring-[#0f172a]"></span>
+          <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 shadow-lg">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-1 rounded-md bg-sky-500/10 text-sky-400 font-mono text-xs font-medium">
+                Sept 2026 – Nov 2026
+              </span>
+              <span class="text-xs font-mono text-slate-400">Experience • AI/ML Engineering</span>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-white">AI/ML Intern (CET Team)</h4>
+            <p class="text-indigo-400 font-medium text-sm mb-3">Siam Computing</p>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Architected and delivered end-to-end multimodal computer vision/audio pipelines (Elderly Fall Detection) and multi-tenant corporate RAG assistants (LegalBot) using FastAPI, Pinecone Serverless, MediaPipe, YAMNet, and Groq Cloud streaming.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-indigo-400 ring-4 ring-[#0f172a]"></span>
+          <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 shadow-lg">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 font-mono text-xs font-medium">
+                2025 – 2026
+              </span>
+              <span class="text-xs font-mono text-slate-400">Certification • Data Science &amp; AI</span>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-white">Master Data Science &amp; Advanced Professional Program</h4>
+            <p class="text-sky-400 font-medium text-sm mb-3">HCL GUVI &amp; IITM Pravartak</p>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Completed intensive training in Machine Learning, Deep Learning, NLP, and Generative AI. Built and benchmarked the Multi-Task News Intelligence System (Classification, NER, and BART/T5 Summarization) alongside predictive regression and CNN vision pipelines.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-500 ring-4 ring-[#0f172a]"></span>
+          <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 shadow-lg">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-300 font-mono text-xs font-medium">
+                Until April 2025
+              </span>
+              <span class="text-xs font-mono text-slate-400">Experience • Engineering Operations</span>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-white">AMC Engineer</h4>
+            <p class="text-indigo-400 font-medium text-sm mb-3">Anjan Group • Dubai, UAE</p>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Led Annual Maintenance Contract (AMC) engineering operations, preventive diagnostics, root-cause fault resolution, and SLA compliance across commercial infrastructure in Dubai.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="relative pl-8 sm:pl-10">
+          <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-slate-500 ring-4 ring-[#0f172a]"></span>
+          <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 shadow-lg">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-1 rounded-md bg-slate-700/60 text-slate-300 font-mono text-xs font-medium">
+                2010 – 2014
+              </span>
+              <span class="text-xs font-mono text-slate-400">Education • Bachelor of Engineering</span>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold text-white">B.E. in Mechanical Engineering</h4>
+            <p class="text-sky-400 font-medium text-sm mb-3">JCT College of Engineering and Technology • Coimbatore, India</p>
+            <p class="text-slate-300 text-sm leading-relaxed">
+              Built a strong quantitative foundation in engineering mathematics, statistical analysis, thermodynamics, and systems modeling.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Skills Matrix Section -->
+  <section id="skills" class="py-20 sm:py-24 border-b border-slate-800/70">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12">
+        <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-400 mb-3">
+          <span class="w-8 h-[1px] bg-sky-400"></span>
+          Capabilities &amp; Stack
+        </div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+          Technical Skills Matrix
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Category 1: GenAI & LLMs -->
+        <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 sm:p-7 hover:border-sky-500/40 transition-colors">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white">GenAI &amp; LLMs</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-sky-300">RAG</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Pinecone Serverless</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Sentence Transformers</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Prompt Engineering</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-sky-300">Groq Cloud</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">LLM Streaming</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Multi-Tier Agent Memory</span>
+          </div>
+        </div>
+
+        <!-- Category 2: Deep Learning & NLP -->
+        <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 sm:p-7 hover:border-indigo-500/40 transition-colors">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white">Deep Learning &amp; NLP</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-indigo-300">PyTorch</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-indigo-300">TensorFlow</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Hugging Face Transformers (BERT, BART, T5)</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">MediaPipe</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">OpenCV</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">YAMNet</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">ResNet50</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">BiLSTM</span>
+          </div>
+        </div>
+
+        <!-- Category 3: ML & Analytics -->
+        <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 sm:p-7 hover:border-sky-500/40 transition-colors">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white">ML &amp; Analytics</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-sky-300">Scikit-Learn</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Pandas</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">NumPy</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Feature Engineering</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">ROUGE / Evaluation Pipelines</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">MySQL</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">MongoDB</span>
+          </div>
+        </div>
+
+        <!-- Category 4: Backend & Deployment -->
+        <div class="bg-[#1e293b] border border-slate-700/70 rounded-2xl p-6 sm:p-7 hover:border-indigo-500/40 transition-colors">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
+              </svg>
+            </div>
+            <h4 class="text-lg font-bold text-white">Backend &amp; Deployment</h4>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-indigo-300">Python</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-indigo-300">FastAPI</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Uvicorn</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Streamlit</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Chainlit</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Postman</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">Git / GitLab</span>
+            <span class="px-3 py-1.5 rounded-lg bg-slate-900/90 border border-slate-700/80 text-xs sm:text-sm font-mono text-slate-200">AWS (EC2, S3, RDS)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Contact & Quick Copy Section -->
+  <section id="contact" class="py-20 sm:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <!-- Left Column: Direct Links & One-Click Copy Utilities -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-400">
+            <span class="w-8 h-[1px] bg-sky-400"></span>
+            Connect &amp; Collaborate
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+            Let's Build Intelligent Systems Together
+          </h3>
+          <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+            Available for AI/ML Engineer, Generative AI Developer, and Data Scientist roles in Coimbatore, across India, or remote. Reach out directly via LinkedIn, inspect my repositories on GitHub, or compose a quick note.
+          </p>
+
+          <!-- Profile Links & Copy Controls -->
+          <div class="space-y-3 pt-2">
+            <!-- LinkedIn Card -->
+            <div class="flex items-center justify-between gap-3 bg-[#1e293b] border border-slate-700/80 rounded-xl p-3.5">
+              <a href="https://www.linkedin.com/in/nirmal-kumar-sankaranarayanan-a9172bb5" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium text-slate-200 hover:text-indigo-400 transition-colors truncate">
+                <span class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shrink-0">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"></path>
+                  </svg>
+                </span>
+                <span class="truncate">linkedin.com/in/nirmal-kumar-sankaranarayanan</span>
+              </a>
+              <button onclick="copyText('https://www.linkedin.com/in/nirmal-kumar-sankaranarayanan-a9172bb5', 'LinkedIn URL copied!')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 hover:text-white border border-slate-700 shrink-0 transition-colors">
+                Copy
+              </button>
+            </div>
+
+            <!-- GitHub Card -->
+            <div class="flex items-center justify-between gap-3 bg-[#1e293b] border border-slate-700/80 rounded-xl p-3.5">
+              <a href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm font-medium text-slate-200 hover:text-sky-400 transition-colors truncate">
+                <span class="w-9 h-9 rounded-lg bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 shrink-0">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                  </svg>
+                </span>
+                <span class="truncate">github.com/kumarnirmal158</span>
+              </a>
+              <button onclick="copyText('https://github.com/kumarnirmal158', 'GitHub URL copied!')" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-300 hover:text-white border border-slate-700 shrink-0 transition-colors">
+                Copy
+              </button>
+            </div>
+
+            <!-- Copy Portfolio Summary Button -->
+            <button onclick="copyPortfolioSummary()" class="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700 hover:border-sky-400/50 text-xs sm:text-sm font-mono text-sky-400 transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+              </svg>
+              Copy Recruiter Bio &amp; Links
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive Message Composer -->
+        <div class="lg:col-span-7 bg-[#1e293b] border border-slate-700/80 rounded-2xl p-6 sm:p-8 shadow-xl">
+          <h4 class="text-lg font-bold text-white mb-2">Quick Message Composer</h4>
+          <p class="text-xs sm:text-sm text-slate-400 mb-6">
+            Draft a message below to copy directly for LinkedIn InMail or open in your default mail client.
+          </p>
+
+          <form id="contact-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="sender-name" class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">Your Name</label>
+                <input type="text" id="sender-name" required placeholder="e.g., Priya Sharma" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition-colors" />
+              </div>
+              <div>
+                <label for="sender-role" class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">Company / Role Opportunity</label>
+                <input type="text" id="sender-role" required placeholder="e.g., AI/ML Engineer Role" class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition-colors" />
+              </div>
+            </div>
+
+            <div>
+              <label for="sender-message" class="block text-xs font-mono uppercase tracking-wider text-slate-400 mb-1.5">Message</label>
+              <textarea id="sender-message" rows="4" required placeholder="Hi Nirmal, I reviewed your RAG and multimodal AI projects and would love to connect regarding..." class="w-full px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-700 text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:border-sky-400 transition-colors"></textarea>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <button type="submit" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-semibold text-sm hover:opacity-95 transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                Copy Formatted Message for LinkedIn
+              </button>
+
+              <a href="https://www.linkedin.com/in/nirmal-kumar-sankaranarayanan-a9172bb5" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-sm font-medium transition-colors">
+                Open LinkedIn Profile ↗
+              </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800/80 py-8 bg-[#0b1120]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-slate-400">
+      <div>
+        &copy; 2026 <span class="text-slate-200 font-medium">Nirmal Kumar Sankaranarayanan</span>. Built for GitHub Pages / Vercel.
+      </div>
+      <div class="flex items-center gap-5 font-mono">
+        <a href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" class="hover:text-sky-400 transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/nirmal-kumar-sankaranarayanan-a9172bb5" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-400 transition-colors">LinkedIn</a>
+        <a href="#top" class="hover:text-white transition-colors">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Structured Project Portfolio Data
+    const projectsData = [
+      {
+        id: 'legalbot',
+        title: 'LegalBot — Multi-Tenant Corporate Legal Assistant',
+        category: 'genai',
+        categoryLabel: 'Generative AI & RAG',
+        metric: 'Multi-Tenant RAG + Streaming',
+        summary: 'Multi-tenant architecture with multi-tier conversation memory and token-aware Retrieval-Augmented Generation (RAG) for real-time corporate legal document Q&A.',
+        highlights: [
+          'Engineered strict tenant namespace isolation in Pinecone Serverless to guarantee zero cross-organization data leakage across corporate legal repositories.',
+          'Implemented multi-tier agent conversation memory combined with token-aware context budgeting to preserve long-session reasoning without exceeding LLM context limits.',
+          'Integrated Groq Cloud LLM streaming over FastAPI and Streamlit for sub-second time-to-first-token legal clause synthesis and citation lookup.'
+        ],
+        stack: ['FastAPI', 'MongoDB', 'Pinecone Serverless', 'Groq Cloud LLM Streaming', 'Streamlit']
+      },
+      {
+        id: 'fall-detection',
+        title: 'Multimodal Elderly Fall Detection & Intelligent Emergency Response',
+        category: 'cv',
+        categoryLabel: 'Computer Vision & Multimodal AI',
+        metric: 'Video + Audio + VLM Fusion',
+        summary: 'Fuses temporal video pose analysis, YAMNet acoustic event classification, speech distress detection, and VLM summaries to detect falls while filtering false positives (e.g., pushups, bending).',
+        highlights: [
+          'Extracted real-time skeletal keypoints and temporal descent velocity vectors using OpenCV and MediaPipe Pose Landmarker.',
+          'Fused visual pose trajectories with TensorFlow Hub YAMNet acoustic impact classification and speech distress detection to filter benign floor activities such as pushups or bending.',
+          'Automated VLM incident summarization and emergency alert dispatch via a FastAPI / Uvicorn backend and live Streamlit monitoring dashboard.'
+        ],
+        stack: ['Python', 'OpenCV', 'MediaPipe Pose Landmarker', 'TensorFlow Hub YAMNet', 'FastAPI', 'Uvicorn', 'Streamlit']
+      },
+      {
+        id: 'news-intelligence',
+        title: 'Multi-Task News Intelligence System (GUVI Capstone)',
+        category: 'nlp',
+        categoryLabel: 'NLP & Transformers',
+        metric: 'BART-base ROUGE-L: 0.2058',
+        summary: 'End-to-end NLP suite featuring News Classification, Named Entity Recognition (NER), and Abstractive Summarization benchmarking TF-IDF, LSTM/GRU Seq2Seq, T5-small, and BART-base.',
+        highlights: [
+          'Benchmarked 5 summarization paradigms on the MIND dataset: TF-IDF extractive baseline, custom LSTM/GRU Seq2Seq, t5-small, and facebook/bart-base (achieving ROUGE-1: 0.2476, ROUGE-2: 0.0998, ROUGE-L: 0.2058).',
+          'Built multi-class news category & topic classifiers comparing TF-IDF + Logistic Regression/LinearSVC against fine-tuned BERT transformers.',
+          'Implemented token-level Named Entity Recognition (NER) pipelines with BiLSTM and BERT token classification to extract structured entities from news bodies.'
+        ],
+        stack: ['PyTorch', 'Hugging Face Transformers (BERT, facebook/bart-base, t5-small)', 'BiLSTM', 'TF-IDF']
+      },
+      {
+        id: 'youtube-monetization',
+        title: 'YouTube Monetization Prediction Model',
+        category: 'nlp',
+        categoryLabel: 'Classical ML & Analytics',
+        metric: 'R² Score: 0.952',
+        summary: 'End-to-end regression pipeline utilizing skew-based imputation and domain feature engineering, achieving an R² score of 0.952.',
+        highlights: [
+          'Designed distribution-aware skew-based imputation pipelines to handle heavy-tailed creator engagement metrics without distorting variance.',
+          'Engineered domain interaction features across watch time, CTR, subscriber velocity, and engagement ratios.',
+          'Validated multiple ensemble regressors using cross-validation, attaining a final R² score of 0.952.'
+        ],
+        stack: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'Feature Engineering']
+      },
+      {
+        id: 'fish-classification',
+        title: 'Deep Learning Fish Image Classification',
+        category: 'cv',
+        categoryLabel: 'Computer Vision',
+        metric: 'ResNet50 vs Custom CNN',
+        summary: 'Automated multi-class marine species recognition comparing custom convolutional architectures against fine-tuned ResNet50 transfer learning.',
+        highlights: [
+          'Constructed a stratified image augmentation and preprocessing pipeline in TensorFlow/Keras to improve generalization across varying underwater lighting conditions.',
+          'Benchmarked a custom multi-block CNN baseline against a fine-tuned ResNet50 backbone using precision, recall, F1-score, and confusion matrix diagnostics.',
+          'Saved production-ready model weights and class label mappings for real-time species inference.'
+        ],
+        stack: ['TensorFlow/Keras', 'ResNet50', 'Custom CNN', 'Transfer Learning']
+      }
+    ];
+
+    const projectsGrid = document.getElementById('projects-grid');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+
+    // Render Project Cards
+    function renderProjects(filter = 'all') {
+      projectsGrid.innerHTML = '';
+      const filtered = filter === 'all'
+        ? projectsData
+        : projectsData.filter(p => p.category === filter);
+
+      filtered.forEach(project => {
+        const card = document.createElement('article');
+        card.className = 'group flex flex-col justify-between bg-[#1e293b] border border-slate-700/80 hover:border-sky-400/60 rounded-2xl p-6 shadow-lg hover:-translate-y-1 transition-all duration-300 animate-fade-in';
+
+        const stackBadges = project.stack.slice(0, 4).map(tech =>
+          `<span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-700/80 text-xs font-mono text-slate-300">${tech}</span>`
+        ).join('');
+
+        const extraCount = project.stack.length > 4
+          ? `<span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-700/80 text-xs font-mono text-sky-400">+${project.stack.length - 4}</span>`
+          : '';
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-mono text-sky-400">${project.categoryLabel}</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-[11px] font-mono text-indigo-300">
+                ${project.metric}
+              </span>
+            </div>
+
+            <h4 class="text-lg font-bold text-white group-hover:text-sky-300 transition-colors mb-3 leading-snug">
+              ${project.title}
+            </h4>
+
+            <p class="text-slate-400 text-sm leading-relaxed mb-5">
+              ${project.summary}
+            </p>
+          </div>
+
+          <div>
+            <div class="flex flex-wrap gap-1.5 mb-5">
+              ${stackBadges}${extraCount}
+            </div>
+
+            <div class="pt-4 border-t border-slate-700/70 flex items-center justify-between">
+              <button onclick="openProjectModal('${project.id}')" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-sky-400 hover:text-sky-300 transition-colors">
+                Architecture &amp; Metrics
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </button>
+              <a href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" class="text-slate-400 hover:text-white transition-colors">
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        `;
+        projectsGrid.appendChild(card);
+      });
+    }
+
+    // Filter Button Event Listeners
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'bg-sky-500', 'text-slate-950');
+          b.classList.add('bg-[#1e293b]', 'text-slate-300', 'border', 'border-slate-700');
+        });
+        btn.classList.add('active', 'bg-sky-500', 'text-slate-950');
+        btn.classList.remove('bg-[#1e293b]', 'text-slate-300', 'border', 'border-slate-700');
+        renderProjects(btn.dataset.filter);
+      });
+    });
+
+    // Modal Logic
+    const modal = document.getElementById('project-modal');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const modalDoneBtn = document.getElementById('modal-done-btn');
+
+    function openProjectModal(projectId) {
+      const project = projectsData.find(p => p.id === projectId);
+      if (!project) return;
+
+      document.getElementById('modal-category').textContent = `${project.categoryLabel} • ${project.metric}`;
+      document.getElementById('modal-title').textContent = project.title;
+      document.getElementById('modal-description').textContent = project.summary;
+
+      const highlightsList = document.getElementById('modal-highlights');
+      highlightsList.innerHTML = project.highlights.map(item => `
+        <li class="flex items-start gap-2.5">
+          <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-sky-400 shrink-0"></span>
+          <span>${item}</span>
+        </li>
+      `).join('');
+
+      const stackContainer = document.getElementById('modal-stack');
+      stackContainer.innerHTML = project.stack.map(tech => `
+        <span class="px-3 py-1 rounded-lg bg-slate-900 border border-slate-700 text-xs font-mono text-sky-300">${tech}</span>
+      `).join('');
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    closeModalBtn.addEventListener('click', closeProjectModal);
+    modalDoneBtn.addEventListener('click', closeProjectModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeProjectModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeProjectModal();
+      }
+    });
+
+    // Mobile Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      iconOpen.classList.toggle('hidden');
+      iconClose.classList.toggle('hidden');
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+      });
+    });
+
+    // Clipboard Utility using document.execCommand('copy') for reliable iFrame support
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toast-notification');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = message;
+
+      toast.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-4', 'opacity-0');
+      });
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('translate-y-4', 'opacity-0');
+        setTimeout(() => toast.classList.add('hidden'), 300);
+      }, 3000);
+    }
+
+    function copyText(text, successMsg) {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (err) {
+        showToast('Unable to copy automatically.');
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function copyPortfolioSummary() {
+      const bio = [
+        'Nirmal Kumar Sankaranarayanan — AI / Machine Learning Engineer & Data Scientist',
+        'Location: Coimbatore, Tamil Nadu, India',
+        'Education & Certification: HCL GUVI / IITM Pravartak Data Science Program | B.E. Mechanical Engineering',
+        'GitHub: https://github.com/kumarnirmal158',
+        'LinkedIn: https://www.linkedin.com/in/nirmal-kumar-sankaranarayanan-a9172bb5'
+      ].join('\n');
+      copyText(bio, 'Recruiter bio & links copied!');
+    }
+
+    // Contact Form Submission Handler
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('sender-name').value.trim();
+      const role = document.getElementById('sender-role').value.trim();
+      const msg = document.getElementById('sender-message').value.trim();
+
+      const formatted = `Hi Nirmal,\n\nI'm ${name} reaching out regarding ${role}.\n\n${msg}\n\nBest regards,\n${name}`;
+      copyText(formatted, 'Message copied! Ready to paste on LinkedIn.');
+    });
+
+    // Initial render
+    renderProjects('all');
+  </script>
+</body>
+</html>
