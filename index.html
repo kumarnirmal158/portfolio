@@ -193,8 +193,8 @@
         <!-- Quick Metric Highlights -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-14 pt-10 border-t border-slate-800/80">
           <div class="bg-[#1e293b]/60 border border-slate-800 rounded-xl p-4">
-            <div class="font-mono text-xl sm:text-2xl font-bold text-sky-400">5+</div>
-            <div class="text-xs sm:text-sm text-slate-400 mt-1">End-to-End AI/ML Systems</div>
+            <div class="font-mono text-xl sm:text-2xl font-bold text-sky-400">9</div>
+            <div class="text-xs sm:text-sm text-slate-400 mt-1">GitHub Repositories</div>
           </div>
           <div class="bg-[#1e293b]/60 border border-slate-800 rounded-xl p-4">
             <div class="font-mono text-xl sm:text-2xl font-bold text-indigo-400">0.2058</div>
@@ -288,7 +288,7 @@
         <!-- Interactive Category Filter Tabs -->
         <div id="project-filters" class="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
           <button data-filter="all" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-sky-500 text-slate-950 transition-all">
-            All (5)
+            All (9)
           </button>
           <button data-filter="genai" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#1e293b] text-slate-300 border border-slate-700 hover:border-sky-400/50 transition-all">
             Generative AI &amp; RAG
@@ -299,12 +299,31 @@
           <button data-filter="nlp" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#1e293b] text-slate-300 border border-slate-700 hover:border-sky-400/50 transition-all">
             NLP &amp; ML
           </button>
+          <button data-filter="analytics" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium bg-[#1e293b] text-slate-300 border border-slate-700 hover:border-sky-400/50 transition-all">
+            Data Analytics
+          </button>
         </div>
       </div>
 
       <!-- Projects Grid -->
       <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Populated dynamically via JavaScript for clean filtering and modal inspection -->
+      </div>
+
+      <!-- More GitHub Repositories Quick-Link Strip -->
+      <div class="mt-10 bg-[#1e293b]/80 border border-slate-700/80 rounded-2xl p-5 sm:p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+            <h4 class="text-sm sm:text-base font-bold text-white font-mono">More GitHub Repositories</h4>
+          </div>
+          <a href="https://github.com/kumarnirmal158?tab=repositories" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-sky-400 hover:text-sky-300 transition-colors">
+            All 9 Repositories on GitHub ↗
+          </a>
+        </div>
+        <div id="more-repos-strip" class="flex flex-wrap gap-2">
+          <!-- Populated dynamically with direct repository links -->
+        </div>
       </div>
     </div>
   </section>
@@ -333,11 +352,11 @@
       </div>
 
       <div class="pt-4 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-3">
-        <a href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500 hover:text-slate-950 font-semibold text-sm transition-all">
+        <a id="modal-repo-link" href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/30 hover:bg-sky-500 hover:text-slate-950 font-semibold text-sm transition-all">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
           </svg>
-          View Repositories on GitHub
+          Open GitHub Repository ↗
         </a>
         <button id="modal-done-btn" class="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white text-sm font-medium transition-colors">
           Close
@@ -655,82 +674,167 @@
 
   <!-- Interactive Scripts -->
   <script>
-    // Structured Project Portfolio Data
+    // Structured Project Portfolio Data (All 9 GitHub Repositories)
     const projectsData = [
       {
         id: 'legalbot',
-        title: 'LegalBot — Multi-Tenant Corporate Legal Assistant',
+        shortName: 'LegalBot RAG Assistant',
+        title: 'LegalBot — Enterprise Legal Assistant with Multi-Tier Memory & Token-Aware RAG',
+        repoUrl: 'https://github.com/kumarnirmal158/LegalBot-Enterprise-Legal-Assistant-with-Multi-Tier-Memory-Token-Aware-RAG',
         category: 'genai',
         categoryLabel: 'Generative AI & RAG',
-        metric: 'Multi-Tenant RAG + Streaming',
-        summary: 'Multi-tenant architecture with multi-tier conversation memory and token-aware Retrieval-Augmented Generation (RAG) for real-time corporate legal document Q&A.',
+        metric: 'Multi-Tier RAG + Streaming',
+        summary: 'Multi-tenant enterprise legal assistant with multi-tier conversation memory and token-aware Retrieval-Augmented Generation (RAG) for real-time legal document Q&A.',
         highlights: [
           'Engineered strict tenant namespace isolation in Pinecone Serverless to guarantee zero cross-organization data leakage across corporate legal repositories.',
           'Implemented multi-tier agent conversation memory combined with token-aware context budgeting to preserve long-session reasoning without exceeding LLM context limits.',
-          'Integrated Groq Cloud LLM streaming over FastAPI and Streamlit for sub-second time-to-first-token legal clause synthesis and citation lookup.'
+          'Integrated Groq Cloud LLM streaming over FastAPI, MongoDB, and Streamlit for low-latency legal clause synthesis and citation retrieval.'
         ],
-        stack: ['FastAPI', 'MongoDB', 'Pinecone Serverless', 'Groq Cloud LLM Streaming', 'Streamlit']
+        stack: ['FastAPI', 'MongoDB', 'Pinecone Serverless', 'Groq Cloud Streaming', 'Streamlit']
       },
       {
         id: 'fall-detection',
+        shortName: 'Multimodal Fall Detection',
         title: 'Multimodal Elderly Fall Detection & Intelligent Emergency Response',
+        repoUrl: 'https://github.com/kumarnirmal158/Multimodal-Elderly-Fall-Detection-Intelligent-Emergency-Response',
         category: 'cv',
-        categoryLabel: 'Computer Vision & Multimodal AI',
+        categoryLabel: 'Computer Vision',
         metric: 'Video + Audio + VLM Fusion',
-        summary: 'Fuses temporal video pose analysis, YAMNet acoustic event classification, speech distress detection, and VLM summaries to detect falls while filtering false positives (e.g., pushups, bending).',
+        summary: 'Fuses temporal video pose analysis, YAMNet acoustic event classification, speech distress detection, and VLM incident summaries to detect falls while filtering false positives.',
         highlights: [
           'Extracted real-time skeletal keypoints and temporal descent velocity vectors using OpenCV and MediaPipe Pose Landmarker.',
           'Fused visual pose trajectories with TensorFlow Hub YAMNet acoustic impact classification and speech distress detection to filter benign floor activities such as pushups or bending.',
-          'Automated VLM incident summarization and emergency alert dispatch via a FastAPI / Uvicorn backend and live Streamlit monitoring dashboard.'
+          'Built a FastAPI / Uvicorn backend, incident database, VLM report generator, and interactive monitoring dashboard.'
         ],
-        stack: ['Python', 'OpenCV', 'MediaPipe Pose Landmarker', 'TensorFlow Hub YAMNet', 'FastAPI', 'Uvicorn', 'Streamlit']
+        stack: ['Python', 'OpenCV', 'MediaPipe Pose Landmarker', 'YAMNet', 'FastAPI', 'Streamlit']
       },
       {
         id: 'news-intelligence',
-        title: 'Multi-Task News Intelligence System (GUVI Capstone)',
+        shortName: 'Multi-Task News Intelligence',
+        title: 'Multi-Task News Intelligence System — Classification, NER & Summarization',
+        repoUrl: 'https://github.com/kumarnirmal158/Multi-Task-News-Intelligence-System',
         category: 'nlp',
-        categoryLabel: 'NLP & Transformers',
+        categoryLabel: 'NLP & ML',
         metric: 'BART-base ROUGE-L: 0.2058',
         summary: 'End-to-end NLP suite featuring News Classification, Named Entity Recognition (NER), and Abstractive Summarization benchmarking TF-IDF, LSTM/GRU Seq2Seq, T5-small, and BART-base.',
         highlights: [
-          'Benchmarked 5 summarization paradigms on the MIND dataset: TF-IDF extractive baseline, custom LSTM/GRU Seq2Seq, t5-small, and facebook/bart-base (achieving ROUGE-1: 0.2476, ROUGE-2: 0.0998, ROUGE-L: 0.2058).',
-          'Built multi-class news category & topic classifiers comparing TF-IDF + Logistic Regression/LinearSVC against fine-tuned BERT transformers.',
-          'Implemented token-level Named Entity Recognition (NER) pipelines with BiLSTM and BERT token classification to extract structured entities from news bodies.'
+          'Benchmarked summarization across TF-IDF extractive scoring, LSTM/GRU Seq2Seq, t5-small, and facebook/bart-base (achieving ROUGE-1: 0.2476, ROUGE-2: 0.0998, ROUGE-L: 0.2058).',
+          'Built news category & topic classification workflows comparing classical vectorization against fine-tuned transformer models.',
+          'Implemented token-level Named Entity Recognition (NER) pipelines to extract structured entities from news headlines and bodies.'
         ],
-        stack: ['PyTorch', 'Hugging Face Transformers (BERT, facebook/bart-base, t5-small)', 'BiLSTM', 'TF-IDF']
+        stack: ['PyTorch', 'Hugging Face (BERT, BART, T5)', 'BiLSTM', 'TF-IDF', 'Streamlit']
       },
       {
-        id: 'youtube-monetization',
-        title: 'YouTube Monetization Prediction Model',
-        category: 'nlp',
-        categoryLabel: 'Classical ML & Analytics',
-        metric: 'R² Score: 0.952',
-        summary: 'End-to-end regression pipeline utilizing skew-based imputation and domain feature engineering, achieving an R² score of 0.952.',
+        id: 'fish-classification',
+        shortName: 'Multiclass Fish Classification',
+        title: 'Multiclass Fish Image Classification — CNN / ResNet50 Transfer Learning',
+        repoUrl: 'https://github.com/kumarnirmal158/Multiclass-Fish-Image-Classification',
+        category: 'cv',
+        categoryLabel: 'Computer Vision',
+        metric: 'ResNet50 vs Custom CNN',
+        summary: 'Automated multiclass fish species image classification comparing custom convolutional neural networks against fine-tuned ResNet50 transfer learning.',
         highlights: [
-          'Designed distribution-aware skew-based imputation pipelines to handle heavy-tailed creator engagement metrics without distorting variance.',
-          'Engineered domain interaction features across watch time, CTR, subscriber velocity, and engagement ratios.',
-          'Validated multiple ensemble regressors using cross-validation, attaining a final R² score of 0.952.'
+          'Built image preprocessing and augmentation pipelines in TensorFlow/Keras for multiclass marine species recognition.',
+          'Evaluated custom CNN architectures against ResNet50 transfer learning using precision, recall, F1-score, and confusion matrices.',
+          'Exported trained model artifacts for reproducible inference and deployment.'
+        ],
+        stack: ['Python', 'TensorFlow', 'Keras', 'ResNet50', 'Custom CNN']
+      },
+      {
+        id: 'content-monetization',
+        shortName: 'Content Monetization Modeler',
+        title: 'Content Monetization Modeler — YouTube Ad Revenue & Monetization Prediction',
+        repoUrl: 'https://github.com/kumarnirmal158/Content-Monetization-Modeler',
+        category: 'nlp',
+        categoryLabel: 'NLP & ML',
+        metric: 'Regression R²: 0.952',
+        summary: 'End-to-end machine learning regression pipeline for predicting YouTube ad revenue and creator monetization performance using domain feature engineering and skew-aware preprocessing.',
+        highlights: [
+          'Handled skewed engagement and viewership distributions through distribution-aware imputation and transformation pipelines.',
+          'Engineered interaction features across watch metrics, engagement rates, and content attributes to improve predictive accuracy up to R² = 0.952.',
+          'Evaluated regression models systematically for reliable creator revenue forecasting.'
         ],
         stack: ['Python', 'Scikit-Learn', 'Pandas', 'NumPy', 'Feature Engineering']
       },
       {
-        id: 'fish-classification',
-        title: 'Deep Learning Fish Image Classification',
-        category: 'cv',
-        categoryLabel: 'Computer Vision',
-        metric: 'ResNet50 vs Custom CNN',
-        summary: 'Automated multi-class marine species recognition comparing custom convolutional architectures against fine-tuned ResNet50 transfer learning.',
+        id: 'amazon-music-clustering',
+        shortName: 'Amazon Music Clustering',
+        title: 'Amazon Music Clustering — Unsupervised Customer/Track Segmentation',
+        repoUrl: 'https://github.com/kumarnirmal158/Amazon-Music-Clustering-',
+        category: 'analytics',
+        categoryLabel: 'Data Analytics',
+        metric: 'K-Means & PCA Segmentation',
+        summary: 'Unsupervised machine learning and exploratory data analysis pipeline for segmenting tracks and listening patterns using feature scaling, Elbow method, silhouette scoring, and PCA.',
         highlights: [
-          'Constructed a stratified image augmentation and preprocessing pipeline in TensorFlow/Keras to improve generalization across varying underwater lighting conditions.',
-          'Benchmarked a custom multi-block CNN baseline against a fine-tuned ResNet50 backbone using precision, recall, F1-score, and confusion matrix diagnostics.',
-          'Saved production-ready model weights and class label mappings for real-time species inference.'
+          'Performed data exploration, cleaning, feature selection, and normalization across music attribute datasets.',
+          'Determined optimal cluster counts with Elbow method and silhouette score diagnostics, paired with PCA dimensionality reduction.',
+          'Generated interpretable cluster profiles to support recommendation and audience targeting insights.'
         ],
-        stack: ['TensorFlow/Keras', 'ResNet50', 'Custom CNN', 'Transfer Learning']
+        stack: ['Python', 'Pandas', 'NumPy', 'Scikit-Learn', 'K-Means', 'PCA']
+      },
+      {
+        id: 'luxury-housing-sales',
+        shortName: 'Luxury Housing Sales Analysis',
+        title: 'Luxury Housing Sales Analysis — Real Estate Analytics, SQL & Power BI',
+        repoUrl: 'https://github.com/kumarnirmal158/Luxury-Housing-Sales-Analysis',
+        category: 'analytics',
+        categoryLabel: 'Data Analytics',
+        metric: 'Python + SQL + Power BI',
+        summary: 'End-to-end luxury real estate analytics solution combining Python data cleaning and feature engineering with SQL database storage and interactive Power BI dashboards.',
+        highlights: [
+          'Cleaned and transformed luxury housing transaction data in Python to standardize pricing, location, and property attributes.',
+          'Loaded curated datasets into a SQL database for structured querying, aggregation, and KPI validation.',
+          'Designed interactive Power BI reporting to visualize pricing trends, segment performance, and market insights.'
+        ],
+        stack: ['Python', 'Pandas', 'SQL', 'Power BI', 'Data Analytics']
+      },
+      {
+        id: 'phonepe-pulse-analysis',
+        shortName: 'PhonePe Pulse Data Analysis',
+        title: 'PhonePe Pulse Data Analysis — Python, SQLite, Streamlit & Plotly Analytics',
+        repoUrl: 'https://github.com/kumarnirmal158/PhonePe-Pulse-Data-Analysis',
+        category: 'analytics',
+        categoryLabel: 'Data Analytics',
+        metric: 'SQLite + Streamlit + Plotly',
+        summary: 'Interactive digital payments and insurance analytics application built with Python, SQLite, Plotly visualizations, and Streamlit for geo-temporal trend exploration.',
+        highlights: [
+          'Extracted, cleaned, and structured PhonePe Pulse transaction and insurance datasets into SQLite for fast analytical queries.',
+          'Built interactive Plotly charts and Streamlit views to analyze regional adoption, growth trends, and category breakdowns.',
+          'Enabled dynamic filtering across states, quarters, and transaction segments.'
+        ],
+        stack: ['Python', 'SQLite', 'Streamlit', 'Plotly', 'Pandas']
+      },
+      {
+        id: 'portfolio-website',
+        shortName: 'Portfolio Website Source',
+        title: 'Portfolio Website Source — Responsive Personal Portfolio',
+        repoUrl: 'https://github.com/kumarnirmal158/portfolio',
+        category: 'analytics',
+        categoryLabel: 'Data Analytics',
+        metric: 'GitHub Pages Live Site',
+        summary: 'Responsive single-page portfolio showcasing Nirmal Kumar Sankaranarayanan’s AI/ML, NLP, computer vision, and data analytics projects with interactive filtering and architecture modals.',
+        highlights: [
+          'Built a mobile-first, responsive portfolio interface using HTML5, Tailwind CSS, and vanilla JavaScript.',
+          'Implemented live category filtering, detailed architecture modals, and one-click recruiter copy utilities.',
+          'Deployed continuously via GitHub Pages at https://kumarnirmal158.github.io/portfolio/.'
+        ],
+        stack: ['HTML5', 'Tailwind CSS', 'JavaScript', 'GitHub Pages']
       }
     ];
 
     const projectsGrid = document.getElementById('projects-grid');
+    const moreReposStrip = document.getElementById('more-repos-strip');
     const filterButtons = document.querySelectorAll('.filter-btn');
+
+    // Render "More GitHub Repositories" Quick-Link Strip with all 9 clickable links
+    function renderMoreReposStrip() {
+      moreReposStrip.innerHTML = projectsData.map(project => `
+        <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-700/80 hover:border-sky-400/50 text-xs font-mono text-slate-200 hover:text-sky-300 transition-all">
+          <span>${project.shortName}</span>
+          <span class="text-sky-400">↗</span>
+        </a>
+      `).join('');
+    }
 
     // Render Project Cards
     function renderProjects(filter = 'all') {
@@ -774,17 +878,18 @@
               ${stackBadges}${extraCount}
             </div>
 
-            <div class="pt-4 border-t border-slate-700/70 flex items-center justify-between">
+            <div class="pt-4 border-t border-slate-700/70 flex items-center justify-between gap-3">
               <button onclick="openProjectModal('${project.id}')" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-sky-400 hover:text-sky-300 transition-colors">
                 Architecture &amp; Metrics
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>
-              <a href="https://github.com/kumarnirmal158" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository" class="text-slate-400 hover:text-white transition-colors">
+              <a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-mono text-slate-300 hover:text-sky-400 transition-colors">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                 </svg>
+                <span>GitHub ↗</span>
               </a>
             </div>
           </div>
@@ -818,6 +923,9 @@
       document.getElementById('modal-category').textContent = `${project.categoryLabel} • ${project.metric}`;
       document.getElementById('modal-title').textContent = project.title;
       document.getElementById('modal-description').textContent = project.summary;
+
+      const repoLink = document.getElementById('modal-repo-link');
+      repoLink.href = project.repoUrl;
 
       const highlightsList = document.getElementById('modal-highlights');
       highlightsList.innerHTML = project.highlights.map(item => `
@@ -932,6 +1040,7 @@
     });
 
     // Initial render
+    renderMoreReposStrip();
     renderProjects('all');
   </script>
 </body>
